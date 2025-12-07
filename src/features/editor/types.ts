@@ -116,6 +116,8 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  bringForward: () => void;
+  sendBackwards: () => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
