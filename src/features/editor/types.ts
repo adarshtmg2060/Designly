@@ -3,6 +3,39 @@ import { ITextboxOptions } from "fabric/fabric-impl";
 import { Leaf } from "lucide-react";
 import * as material from "material-colors";
 
+export const filters = [
+  "none",
+  "polaroid",
+  "sepia",
+  "kodachrome",
+  "contrast",
+  "brightness",
+  "brownie",
+  "vintage",
+  "technicolor",
+  "pixelate",
+  "invert",
+  "blur",
+  "sharpen",
+  "emboss",
+  "removecolor",
+  "blacknwhite",
+  "vibrance",
+  "blendcolor",
+  "huerotate",
+  "resize",
+  "gamma",
+  "grayscale",
+  "noise",
+  "saturation",
+  "exposure",
+  "threshold",
+  "cool",
+  "warm",
+  "edge",
+  "posterize",
+];
+
 export const fonts = [
   '"Arial", sans-serif',
   '"Arial Black", sans-serif',
@@ -149,6 +182,7 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  changeImageFilter: (value: string) => void;
   addImage: (value: string) => void;
   delete: () => void;
   changeFontSize: (value: number) => void;

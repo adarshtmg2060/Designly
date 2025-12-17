@@ -19,8 +19,7 @@ import {
   FONT_SIZE,
 } from "@/features/editor/types";
 import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
-import { isTextType } from "@/features/editor/utils";
-import { ITextboxOptions, ITextOptions } from "fabric/fabric-impl";
+import { createFilter, isTextType } from "@/features/editor/utils";
 
 const buildEditor = ({
   canvas,
@@ -54,6 +53,18 @@ const buildEditor = ({
     canvas.setActiveObject(object);
   };
   return {
+    changeImageFilter: (value: string) => {
+      const objects = canvas.getActiveObjects();
+      objects.forEach((object) => {
+        if (object.type === "image") {
+          const imageObject = object as fabric.Image;
+          const effect = createFilter(value);
+          imageObject.filters = effect ? [effect] : [];
+          imageObject.applyFilters();
+          canvas.renderAll();
+        }
+      });
+    },
     addImage: (value: string) => {
       fabric.Image.fromURL(
         value,
