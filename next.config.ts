@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "utfs.io",
       },
+      {
+        protocol: "https",
+        hostname: "image-api.adarshtamang2060.workers.dev",
+      },
     ],
   },
 };
