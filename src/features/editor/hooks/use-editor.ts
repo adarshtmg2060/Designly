@@ -23,6 +23,7 @@ import { createFilter, isTextType } from "@/features/editor/utils";
 import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 
 const buildEditor = ({
+  autoZoom,
   copy,
   paste,
   canvas,
@@ -56,6 +57,49 @@ const buildEditor = ({
     canvas.setActiveObject(object);
   };
   return {
+    autoZoom,
+    getWorkspace,
+    zoomIn: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio += 0.05;
+      const center = canvas.getCenter();
+      canvas.zoomToPoint(
+        new fabric.Point(center.left, center.top),
+
+        // zoom limit set
+        zoomRatio > 1 ? 1 : zoomRatio
+      );
+    },
+    zoomOut: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio -= 0.05;
+      const center = canvas.getCenter();
+      canvas.zoomToPoint(
+        new fabric.Point(center.left, center.top),
+        // zoom limit set
+        zoomRatio < 0.2 ? 0.2 : zoomRatio
+      );
+    },
+    changeSize: (size: { width: number; height: number }) => {
+      const workspace = getWorkspace();
+      workspace?.set(size);
+      autoZoom();
+    },
+    changeBackground: (value: string) => {
+      const workspace = getWorkspace();
+      workspace?.set({ fill: value });
+      canvas.renderAll();
+    },
+    enableDrawingMode: () => {
+      canvas.discardActiveObject();
+      canvas.renderAll();
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.width = strokeWidth;
+      canvas.freeDrawingBrush.color = strokeColor;
+    },
+    disableDrawingMode: () => {
+      canvas.isDrawingMode = false;
+    },
     onCopy: () => copy(),
     onPaste: () => paste(),
     changeImageFilter: (value: string) => {
@@ -266,6 +310,7 @@ const buildEditor = ({
         }
         object.set({ stroke: value });
       });
+      canvas.freeDrawingBrush.color = strokeColor;
       canvas.renderAll();
     },
     changeStrokeWidth: (value: number) => {
@@ -273,6 +318,7 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         object.set({ strokeWidth: value });
       });
+      canvas.freeDrawingBrush.width = strokeWidth;
       canvas.renderAll();
     },
     changeStrokeDashArray: (value: number[]) => {
@@ -443,7 +489,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
   const { copy, paste } = useClipboard({ canvas });
 
-  useAutoResize({
+  const { autoZoom } = useAutoResize({
     canvas,
     container,
   });
@@ -457,6 +503,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const editor = useMemo(() => {
     if (canvas) {
       return buildEditor({
+        autoZoom,
         copy,
         paste,
         canvas,
@@ -475,6 +522,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     }
     return undefined;
   }, [
+    autoZoom,
     copy,
     paste,
     canvas,

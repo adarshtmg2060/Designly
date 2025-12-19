@@ -167,6 +167,7 @@ export interface EditorHookProps {
 }
 
 export type BuildEditorProps = {
+  autoZoom: () => void;
   copy: () => void;
   paste: () => void;
   canvas: fabric.Canvas;
@@ -184,6 +185,14 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  autoZoom: () => void;
+  zoomIn: () => void;
+  zoomOut: () => void;
+  getWorkspace: () => fabric.Object | undefined;
+  changeBackground: (value: string) => void;
+  changeSize: (value: { width: number; height: number }) => void;
+  enableDrawingMode: () => void;
+  disableDrawingMode: () => void;
   onCopy: () => void;
   onPaste: () => void;
   changeImageFilter: (value: string) => void;
