@@ -43,7 +43,7 @@ export const SignUpCard = () => {
             callbackUrl: "/",
           });
         },
-      }
+      },
     );
   };
   return (
@@ -109,7 +109,7 @@ export const SignUpCard = () => {
             <FcGoogle className="mr-2 size-5 top-2.5 left-2.5 absolute" />
             Continue with Google
           </Button>
-          <Button
+          {/* <Button
             disabled={mutation.isPending}
             onClick={() => onProviderSignUp("github")}
             variant="outline"
@@ -118,7 +118,7 @@ export const SignUpCard = () => {
           >
             <FaGithub className="mr-2 size-5 top-2.5 left-2.5 absolute" />
             Continue with Github
-          </Button>
+          </Button> */}
         </div>
         <p className="text-xs text-muted-foreground">
           Already have an account?

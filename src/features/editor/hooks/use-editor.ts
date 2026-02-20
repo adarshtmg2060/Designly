@@ -95,7 +95,7 @@ const buildEditor = ({
     const dataUrl = canvas.toJSON(JSON_KEYS);
     await transformText(dataUrl.objects);
     const fileString = `data:text/json;charset=utf-8,${encodeURIComponent(
-      JSON.stringify(dataUrl, null, "\t")
+      JSON.stringify(dataUrl, null, "\t"),
     )}`;
     downloadFile(fileString, "json");
   };
@@ -142,7 +142,7 @@ const buildEditor = ({
         new fabric.Point(center.left, center.top),
 
         // zoom limit set
-        zoomRatio > 1 ? 1 : zoomRatio
+        zoomRatio > 1 ? 1 : zoomRatio,
       );
     },
     zoomOut: () => {
@@ -152,7 +152,7 @@ const buildEditor = ({
       canvas.zoomToPoint(
         new fabric.Point(center.left, center.top),
         // zoom limit set
-        zoomRatio < 0.2 ? 0.2 : zoomRatio
+        zoomRatio < 0.2 ? 0.2 : zoomRatio,
       );
     },
     changeSize: (size: { width: number; height: number }) => {
@@ -205,7 +205,7 @@ const buildEditor = ({
         },
         {
           crossOrigin: "anonymous",
-        }
+        },
       );
     },
     delete: () => {
@@ -466,7 +466,7 @@ const buildEditor = ({
           stroke: strokeColor,
           strokeWidth: strokeWidth,
           strokeDashArray: strokeDashArray,
-        }
+        },
       );
       addToCanvas(object);
     },
@@ -487,7 +487,7 @@ const buildEditor = ({
           stroke: strokeColor,
           strokeWidth: strokeWidth,
           strokeDashArray: strokeDashArray,
-        }
+        },
       );
       addToCanvas(object);
     },
@@ -693,7 +693,7 @@ export const useEditor = ({
       canvasHistory.current = [currentState];
       setHistoryIndex(0);
     },
-    [canvasHistory, setHistoryIndex]
+    [canvasHistory, setHistoryIndex],
   );
 
   return { init, editor };

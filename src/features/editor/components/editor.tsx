@@ -31,14 +31,15 @@ interface EditorProps {
 export const Editor = ({ initialData }: EditorProps) => {
   const { mutate } = useUpdateProject(initialData.id);
 
-
   //eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(
     debounce((values: { json: string; height: number; width: number }) => {
       mutate(values);
+      // console.log(values);
     }, 500),
-    [mutate]
+    [mutate],
   );
+
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
   const onClearSelection = useCallback(() => {
@@ -69,7 +70,7 @@ export const Editor = ({ initialData }: EditorProps) => {
 
       setActiveTool(tool);
     },
-    [activeTool, editor]
+    [activeTool, editor],
   );
 
   const canvasRef = useRef(null);

@@ -82,7 +82,7 @@ export const SignInCard = () => {
             <FcGoogle className="mr-2 size-5 top-2.5 left-2.5 absolute" />
             Continue with Google
           </Button>
-          <Button
+          {/* <Button
             onClick={() => onProviderSignIn("github")}
             variant="outline"
             size="lg"
@@ -90,7 +90,7 @@ export const SignInCard = () => {
           >
             <FaGithub className="mr-2 size-5 top-2.5 left-2.5 absolute" />
             Continue with Github
-          </Button>
+          </Button> */}
         </div>
         <p className="text-xs text-muted-foreground">
           Don&apos;t have an account?

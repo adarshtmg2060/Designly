@@ -11,7 +11,7 @@ export const SidebarRoutes = () => {
   return (
     <div className="flex flex-col gap-y-4 flex-1">
       <div className="px-4">
-        <Button
+        {/* <Button
           onClick={() => {}}
           className="w-full rounded-xl border-none hover:bg-white hover:opacity-75 transition"
           variant="outline"
@@ -19,7 +19,7 @@ export const SidebarRoutes = () => {
         >
           <Crown className="mr-2 size-4 fill-yellow-500 text-yellow-500" />
           Upgrade to Image Ai Pro
-        </Button>
+        </Button> */}
       </div>
       <div className="px-3">
         <Separator />
@@ -35,7 +35,7 @@ export const SidebarRoutes = () => {
       <div className="px-3">
         <Separator />
       </div>
-      <ul className="flex flex-col gap-y-1 px-3">
+      {/* <ul className="flex flex-col gap-y-1 px-3">
         <SidebarItem
           href={pathname}
           icon={CreditCard}
@@ -47,7 +47,7 @@ export const SidebarRoutes = () => {
           icon={MessageCircleQuestion}
           label="Get Help"
         />
-      </ul>
+      </ul> */}
     </div>
   );
 };

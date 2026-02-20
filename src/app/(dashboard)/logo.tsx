@@ -17,7 +17,10 @@ export const Logo = () => {
         <div className="size-8 relative">
           <Image src={logo} alt="Image AI" />
         </div>
-        <h1 className={cn(font.className, "text-xl font-bold")}>Image AI</h1>
+        <h1 className={cn(font.className, "text-xl font-bold")}>
+          {" "}
+          Designly
+        </h1>
       </div>
     </Link>
   );

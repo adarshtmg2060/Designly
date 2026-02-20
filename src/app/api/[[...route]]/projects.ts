@@ -8,6 +8,7 @@ import { eq, and, desc } from "drizzle-orm";
 import { error } from "console";
 
 const app = new Hono()
+
   .delete(
     "/:id",
     verifyAuth(),
@@ -29,7 +30,7 @@ const app = new Hono()
       }
 
       return c.json({ data: { id } });
-    }
+    },
   )
   .post(
     "/:id/duplicate",
@@ -65,14 +66,14 @@ const app = new Hono()
         .returning();
 
       return c.json({ data: duplicateData[0] });
-    }
+    },
   )
   .get(
     "/",
     verifyAuth(),
     zValidator(
       "query",
-      z.object({ page: z.coerce.number(), limit: z.coerce.number() })
+      z.object({ page: z.coerce.number(), limit: z.coerce.number() }),
     ),
     async (c) => {
       const auth = c.get("authUser");
@@ -92,7 +93,7 @@ const app = new Hono()
         data,
         nextPage: data.length === limit ? page + 1 : null,
       });
-    }
+    },
   )
   .patch(
     "/:id",
@@ -102,7 +103,7 @@ const app = new Hono()
       "json",
       projectsInsertSchema
         .omit({ id: true, userId: true, createdAt: true, updatedAt: true })
-        .partial()
+        .partial(),
     ),
     async (c) => {
       const auth = c.get("authUser");
@@ -123,7 +124,7 @@ const app = new Hono()
       }
 
       return c.json({ data: data[0] });
-    }
+    },
   )
   .get(
     "/:id",
@@ -145,7 +146,7 @@ const app = new Hono()
         return c.json({ error: "Not found" }, 404);
       }
       return c.json({ data: data[0] });
-    }
+    },
   )
   .post(
     "/",
@@ -157,7 +158,7 @@ const app = new Hono()
         json: true,
         width: true,
         height: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = c.get("authUser");
@@ -183,7 +184,7 @@ const app = new Hono()
       }
 
       return c.json({ data: data[0] });
-    }
+    },
   );
 
 export default app;
