@@ -127,3 +127,39 @@ export const projectsRelations = relations(projects, ({ one }) => ({
 }));
 
 export const projectsInsertSchema = createInsertSchema(projects);
+
+
+export const templates = pgTable("template", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+
+  name: text("name").notNull(),
+
+  image: text("image"), // preview image URL
+
+  json: text("json").notNull(), // template config JSON
+
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+    }),
+
+  createdAt: timestamp("createdAt", { mode: "date" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+
+  updatedAt: timestamp("updatedAt", { mode: "date" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+});
+
+export const templatesRelations = relations(templates, ({ one }) => ({
+  user: one(users, {
+    fields: [templates.userId],
+    references: [users.id],
+  }),
+}));
+
+export const templatesInsertSchema = createInsertSchema(templates);

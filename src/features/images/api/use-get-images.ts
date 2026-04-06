@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/lib/hono";
-import { error } from "console";
 
 export const useGetImages = () => {
   const query = useQuery({
