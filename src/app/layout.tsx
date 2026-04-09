@@ -23,8 +23,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body
-        >
+        <body  >
           <Providers>
             <Toaster />
             {children}

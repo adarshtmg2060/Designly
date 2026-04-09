@@ -110,6 +110,7 @@ const buildEditor = ({
   const getWorkspace = () => {
     return canvas.getObjects().find((object) => object.name === "clip");
   };
+  
   const center = (object: fabric.Object) => {
     const workspace = getWorkspace();
     const center = workspace?.getCenterPoint();

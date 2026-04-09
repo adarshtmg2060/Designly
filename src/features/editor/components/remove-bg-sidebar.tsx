@@ -30,7 +30,7 @@ export const RemoveBgSidebar = ({
     onChangeActiveTool("select");
   };
 
-  // ✅ CANVAS-BASED BACKGROUND REMOVAL (replaces API)
+ 
   const onClick = () => {
     if (!imageSrc || !editor || !selectedObject) return;
     
@@ -58,7 +58,7 @@ export const RemoveBgSidebar = ({
 
       const getIndex = (x: number, y: number) => (y * width + x) * 4;
 
-      // ✅ Sample background points
+ 
       const samplePoints = [
         [0, 0],
         [width - 1, 0],
@@ -106,7 +106,7 @@ export const RemoveBgSidebar = ({
         }
       }
 
-      // ✅ feather smoothing
+       
       const feather = 2;
       const smoothed = new Float32Array(alphaMap);
 
@@ -131,7 +131,7 @@ export const RemoveBgSidebar = ({
         }
       }
 
-      // ✅ apply alpha
+     
       for (let i = 0; i < width * height; i++) {
         data[i * 4 + 3] = Math.round(smoothed[i] * 255);
       }
